@@ -1,0 +1,77 @@
+@@grammar :: MP_COMPILER
+@@parseinfo :: False
+
+dialog::Dialog
+    = 
+    agentList:agent {sectionList:section}+ $
+    ;
+
+section::Section
+    =
+    intent:intent ~ '(' trigger:alt_stmt ')' {statementList:stmt}+  {subSectionList:tone}*
+    ;
+
+tone::Tone          
+    =
+    tone_prefix toneID:identifier ~ '(' trigger:alt_stmt ')' {statementList:stmt}+
+    ;
+
+tone_prefix
+    =
+    '@'
+    ;
+
+intent::Intent       
+    =
+    intent_prefix ~ intentID:identifier
+    ;
+
+intent_prefix
+    =
+    '#'
+    ;
+
+alt_stmt::AlternativeStatement
+    =
+    stmt:(alt_delimiter) %{ eqv_stmt }+
+    ;
+
+alt_delimiter
+    =
+    '|'
+    ;
+
+eqv_stmt::EquivalentStatement
+    =
+    stmt:(eqv_delimiter) %{ string }+
+    ;
+
+eqv_delimiter
+    = 
+    '/'
+    ;
+
+stmt::Statement
+    =
+    agent:identifier ':' ~ content:alt_stmt
+    ;
+    
+string        
+    =
+    '"' ~ @:/([^"\n]|\\"|\\\\)*/ '"' ~
+    ;
+    
+identifier::ID
+    =
+    IDString:/[a-zA-Z_-][a-zA-Z0-9_-]+/
+    ;
+    
+agent::Agent
+    =
+    agent_prefix ~ {agentID:identifier}+
+    ;        
+    
+agent_prefix
+    = 
+    '.AGENT'
+    ;

@@ -1,0 +1,3 @@
+config = {
+    'DEBUG': False
+}

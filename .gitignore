@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# vscode
+.vscode/
+*.code-workspace
+
+# Generated example
+src/example/intent.csv
+src/example/policy.json
+src/example/conversation.py

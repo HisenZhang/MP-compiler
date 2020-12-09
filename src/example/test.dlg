@@ -1,0 +1,13 @@
+.AGENT Chris USER
+
+# self-introducing ("Hello!")
+Chris: "How did you come to U.S.?" / "你怎么来美国的？" |  "How did you came here?" / "你怎么来这里的？"
+
+# air-travel ("I took flight." / "我坐飞机来的。")
+Chris: "Do you have sufficient cash with you?"
+
+    @ positive ("Yes."/"是的。" | "Yep.")        
+    Chris: "That's great!"
+
+    @ negative ("No." | "Nope."/"没有。" | "Not really.")
+    Chris: "Let's withdraw some case now." | "Let's get some cash now."
