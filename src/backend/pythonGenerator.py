@@ -55,12 +55,23 @@ class templateConversation(Conversation):
         \"\"\"
         super().__init__(username, userId, gesture_handler,
                          agent, cnHelper, enHelper, gameProgress)
+        
+        # stack of intents to manage context
+        self._intents = []
+
+        pass
 
     def _generateResponseText(self, intent, entities, difficulty):
         \"\"\"
         Generate response according to received intent
         \"\"\"
         text = ""
+
+        if intent in ['positive', 'negative']:
+            if len(self._intents) > 0:
+                stacked = self._intents.pop()
+                text = self._randomResponse(
+                    '-'.join([stacked, intent]), difficulty)
 
         {sectionList::\n\t\t:%s}
 
@@ -72,6 +83,7 @@ class templateConversation(Conversation):
         \"\"\"
         super().takeActions(userInput, agentResponse, debugInfo, gameProgressProfile)
 
+        pass
 """
 
 
@@ -91,6 +103,12 @@ class ID(ModelRenderer):
 
 
 class Section(ModelRenderer):
-    template = '''\
-    if intent == "{intent}": text += self._randomResponse(intent, difficulty)    
-    '''
+    def render_fields(self, fields):
+        if fields["subSectionList"]:
+            self.template = '''\
+            if intent == "{intent}": text += self._randomResponse(intent, difficulty) ; self._intents.append(intent)    
+            '''
+        else:
+            self.template = '''\
+            if intent == "{intent}": text += self._randomResponse(intent, difficulty)
+            '''
