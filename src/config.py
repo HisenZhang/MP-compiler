@@ -1,3 +1,3 @@
-config = {
+CONFIG = {
     'DEBUG': False
 }

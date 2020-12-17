@@ -13,3 +13,5 @@ class AST(object):
             ast (tatsu.ast.AST): tatsu AST model
         """
         pass
+
+    # TODO Hide AST in abstract data structure

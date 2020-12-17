@@ -1,8 +1,8 @@
-
 import tatsu
 import sys
 from backend.pythonGenerator import PythonGenerator
 from backend.policyGenerator import PolicyGenerator
+from config import CONFIG
 
 grammar = open('grammar.ebnf').read()
 source = str()
@@ -18,16 +18,18 @@ model = parser.parse(source)
 # ast = tatsu.util.asjson(tatsu.compile(grammar).parse(TEST_STRING))
 # print(json.dumps(ast, indent=2))
 
-print('# TRANSLATED TO python')
-code = PythonGenerator().render(model)
-PythonGenerator.format(code)
-print(code)
+if CONFIG["DEBUG"];
+
+    print('# TRANSLATED TO python')
+    code = PythonGenerator().render(model)
+    PythonGenerator.format(code)
+    print(code)
 
 
-record = PolicyGenerator().render(model)
-print(record)
-policy, csv = PolicyGenerator.format(record)
-print('# POLICY')
-print(policy)
-print('# CSV')
-print(csv)
+    record = PolicyGenerator().render(model)
+    print(record)
+    policy, csv = PolicyGenerator.format(record)
+    print('# POLICY')
+    print(policy)
+    print('# CSV')
+    print(csv)
