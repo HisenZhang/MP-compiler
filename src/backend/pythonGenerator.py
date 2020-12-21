@@ -50,11 +50,12 @@ class templateConversation(Conversation):
     \"\"\"Conversation logic for [AGENT_NAME]
     \"\"\"
 
-    def __init__(self, username, userId, gesture_handler, agent, cnHelper=None, enHelper=None, gameProgress=None):
+    def __init__(self, username, userId, agent, cnHelper=None, enHelper=None, gameProgress=None, actionHandler=None):
         \"\"\"Setup private variables & call parent constructor
         \"\"\"
-        super().__init__(username, userId, gesture_handler,
-                         agent, cnHelper, enHelper, gameProgress)
+        super().__init__(username, userId, agent, 
+                            cnHelper=cnHelper, enHelper=enHelper, 
+                            gameProgress=gameProgress, actionHandler=actionHandler)
         
         # stack of intents to manage context
         self._intents = []
