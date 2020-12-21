@@ -40,7 +40,7 @@ class PolicyGenerator(CodeGenerator):
         outer = dict()
 
         # For tones to concatnate.
-        last_intent = ''
+        # last_intent = ''
 
         def splitCN(CNString):
             """
@@ -57,10 +57,10 @@ class PolicyGenerator(CodeGenerator):
                 intent, trigger, agent = stmt[0].split('...')
                 trigger = trigger[1:-1]
 
-                if intent[0] == '@':
-                    intent = last_intent + '-' + intent[1:]
-                else:
-                    last_intent = intent
+                # if intent[0] == '@':
+                #     intent = last_intent + '-' + intent[1:]
+                # else:
+                #     last_intent = intent
 
                 for item in [s.split('///')
                              for s in trigger.split('|||')]:
